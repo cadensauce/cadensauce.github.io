@@ -21,5 +21,13 @@ const PROJECTS = [
     status: "Live",
     url: "https://cadensauce.github.io/classroom-hub/",
     repo: "cadensauce/classroom-hub"
+  },
+  {
+    name: "Boreas",
+    desc: "Free PC optimizer for Windows gamers: one-click Boost, tweaks for each game, NVIDIA and AMD support, and every change can be undone.",
+    status: "In development",
+    url: "https://cadensauce.github.io/boreas/",
+    repo: "cadensauce/boreas",
+    notes: ["Windows", "Rust", "Free download"]
   }
 ];
