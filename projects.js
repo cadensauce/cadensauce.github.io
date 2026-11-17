@@ -17,11 +17,5 @@ const PROJECTS = [
     desc: "School day dashboard: bell schedule, countdown to the final bell, weather, a daily streak and quick links.",
     status: "Live",
     url: "https://cadensauce.github.io/classroom-hub/"
-  },
-  {
-    name: "PvP Mod",
-    desc: "Lightweight client-side PvP and render toolkit for Minecraft: pearl trajectory, totem counter, hitbox highlights, zoom and more, in one flat menu.",
-    status: "In development",
-    notes: ["Fabric", "Minecraft 1.21.11", "v1.2.0", "Client-side only"]
   }
 ];
