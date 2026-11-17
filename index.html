@@ -24,6 +24,7 @@
   p { margin:0; color:var(--muted); font-size:14px; }
   .tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; }
   .tag { font-size:12px; border:1px solid var(--line); border-radius:999px; padding:2px 9px; color:var(--muted); }
+  .upd { font-size:12px; color:var(--muted); }
   .go { font-size:13px; margin-top:auto; } .tags + .go { margin-top:0; }
   footer { margin-top:48px; color:var(--muted); font-size:13px; }
   footer a { color:inherit; }
@@ -40,7 +41,7 @@
 <script>
   const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
   const cls = s => /live/i.test(s) ? "live" : /dev|progress|beta/i.test(s) ? "dev" : "";
-  document.getElementById("grid").innerHTML = PROJECTS.map(p => {
+  document.getElementById("grid").innerHTML = PROJECTS.map((p, i) => {
     const tag = p.url ? "a" : "div";
     const href = p.url ? ` href="${esc(p.url)}"` : "";
     const host = p.url ? new URL(p.url).host + new URL(p.url).pathname.replace(/\/$/, "") : "";
@@ -48,9 +49,19 @@
       <div class="top"><h2>${esc(p.name)}</h2><span class="status ${cls(p.status)}">${esc(p.status)}</span></div>
       <p>${esc(p.desc)}</p>
       ${p.notes ? `<div class="tags">${p.notes.map(n => `<span class="tag">${esc(n)}</span>`).join("")}</div>` : ""}
+      <span class="upd" data-i="${i}"></span>
       ${p.url ? `<span class="go">${esc(host)} →</span>` : ""}
     </${tag}>`;
   }).join("");
+  const ago = d => { const s = (Date.now() - d) / 1000, u = [["year",31536e3],["month",2592e3],["week",604800],["day",86400],["hour",3600],["minute",60]];
+    for (const [n, v] of u) if (s >= v) { const k = Math.floor(s / v); return `${k} ${n}${k > 1 ? "s" : ""} ago`; } return "just now"; };
+  const show = (i, d) => { const el = document.querySelector(`.upd[data-i="${i}"]`); if (!el || isNaN(d)) return;
+    el.textContent = "Updated " + ago(d); el.title = d.toLocaleString(); };
+  PROJECTS.forEach((p, i) => {
+    if (p.repo) fetch(`https://api.github.com/repos/${p.repo}`).then(r => r.ok ? r.json() : null)
+      .then(j => j && show(i, new Date(j.pushed_at))).catch(() => {});
+    else if (p.updated) show(i, new Date(p.updated));
+  });
 </script>
 </body>
 </html>
