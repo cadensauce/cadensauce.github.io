@@ -18,7 +18,10 @@
   a.card:hover { border-color:var(--hover); transform:translateY(-2px); }
   .top { display:flex; justify-content:space-between; align-items:center; gap:8px; }
   .id { display:flex; align-items:center; gap:10px; min-width:0; }
-  .logo { width:32px; height:32px; border-radius:8px; flex:none; object-fit:cover; border:1px solid var(--line); display:grid; place-items:center; font-weight:600; font-size:15px; color:var(--muted); background:var(--bg); }
+  .logo { width:28px; height:28px; flex:none; display:grid; place-items:center; }
+  img.logo { border-radius:7px; object-fit:cover; }
+  svg.logo, .logo svg { width:28px; height:28px; color:var(--text); }
+  span.logo { border:1px solid var(--line); border-radius:7px; font-weight:600; font-size:14px; color:var(--muted); }
   h2 { font-size:17px; margin:0; }
   .status { display:inline-flex; align-items:center; gap:6px; font-size:12px; color:var(--muted); white-space:nowrap; }
   .status::before { content:""; width:7px; height:7px; border-radius:50%; background:var(--off); }
@@ -48,7 +51,7 @@
     const href = p.url ? ` href="${esc(p.url)}"` : "";
     const host = p.url ? new URL(p.url).host + new URL(p.url).pathname.replace(/\/$/, "") : "";
     return `<${tag} class="card"${href}>
-      <div class="top"><div class="id">${p.icon ? `<img class="logo" src="${esc(p.icon)}" alt="">` : `<span class="logo">${esc(p.name[0])}</span>`}<h2>${esc(p.name)}</h2></div><span class="status ${cls(p.status)}">${esc(p.status)}</span></div>
+      <div class="top"><div class="id">${!p.icon ? `<span class="logo">${esc(p.name[0])}</span>` : /^s*<svg/.test(p.icon) ? `<span class="logo" aria-hidden="true">${p.icon}</span>` : `<img class="logo" src="${esc(p.icon)}" alt="">`}<h2>${esc(p.name)}</h2></div><span class="status ${cls(p.status)}">${esc(p.status)}</span></div>
       <p>${esc(p.desc)}</p>
       ${p.notes ? `<div class="tags">${p.notes.map(n => `<span class="tag">${esc(n)}</span>`).join("")}</div>` : ""}
       <span class="upd" data-i="${i}"></span>
