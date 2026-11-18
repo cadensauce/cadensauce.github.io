@@ -4,6 +4,7 @@
 //   status  "Live", "In development", "Paused" or "Archived"
 //   url     optional: where the card links (website, repo or download)
 //   notes   optional: short facts shown as small tags
+//   icon    optional: logo image URL (square); without one the card shows the first letter
 //   repo    optional: "owner/name" on GitHub; the card shows when it was last updated
 //   updated optional: a date like "2026-11-17" if there is no repo
 const PROJECTS = [
@@ -12,6 +13,7 @@ const PROJECTS = [
     desc: "Free fan sports app with live scores and game detail for NFL, college football, NBA, MLB and F1. Web, Windows and Android.",
     status: "Live",
     url: "https://cadensauce.github.io/scoreline/",
+    icon: "https://cadensauce.github.io/scoreline/icon-192.png",
     repo: "cadensauce/scoreline",
     notes: ["Website", "Windows", "Android"]
   },
@@ -27,6 +29,7 @@ const PROJECTS = [
     desc: "Free PC optimizer for Windows gamers: one-click Boost, tweaks for each game, NVIDIA and AMD support, and every change can be undone.",
     status: "In development",
     url: "https://cadensauce.github.io/boreas/",
+    icon: "https://cadensauce.github.io/boreas/icon.png",
     repo: "cadensauce/boreas",
     notes: ["Windows", "Rust", "Free download"]
   }
