@@ -51,7 +51,7 @@
     const href = p.url ? ` href="${esc(p.url)}"` : "";
     const host = p.url ? new URL(p.url).host + new URL(p.url).pathname.replace(/\/$/, "") : "";
     return `<${tag} class="card"${href}>
-      <div class="top"><div class="id">${!p.icon ? `<span class="logo">${esc(p.name[0])}</span>` : /^s*<svg/.test(p.icon) ? `<span class="logo" aria-hidden="true">${p.icon}</span>` : `<img class="logo" src="${esc(p.icon)}" alt="">`}<h2>${esc(p.name)}</h2></div><span class="status ${cls(p.status)}">${esc(p.status)}</span></div>
+      <div class="top"><div class="id">${!p.icon ? `<span class="logo">${esc(p.name[0])}</span>` : /^\s*<svg/.test(p.icon) ? `<span class="logo" aria-hidden="true">${p.icon}</span>` : `<img class="logo" src="${esc(p.icon)}" alt="">`}<h2>${esc(p.name)}</h2></div><span class="status ${cls(p.status)}">${esc(p.status)}</span></div>
       <p>${esc(p.desc)}</p>
       ${p.notes ? `<div class="tags">${p.notes.map(n => `<span class="tag">${esc(n)}</span>`).join("")}</div>` : ""}
       <span class="upd" data-i="${i}"></span>

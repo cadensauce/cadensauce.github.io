@@ -22,6 +22,7 @@ const PROJECTS = [
     desc: "School day dashboard: bell schedule, countdown to the final bell, weather, a daily streak and quick links.",
     status: "Live",
     url: "https://cadensauce.github.io/classroom-hub/",
+    icon: '<svg viewBox="0 0 32 32"><rect x="3.5" y="3.5" width="25" height="25" rx="8.5" fill="none" stroke="currentColor" stroke-width="2.6"/><circle cx="16" cy="16" r="4.2" fill="currentColor"/></svg>',
     repo: "cadensauce/classroom-hub"
   },
   {
