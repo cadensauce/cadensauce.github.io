@@ -37,7 +37,7 @@ const PROJECTS = [
     notes: ["Windows", "Rust", "Free download"]
   },
   {
-    name: "Football Incremental",
+    name: "Incremental (WIP)",
     desc: "Football practice clicker on Roblox: run drills for cash, fill your field with cones, sleds and ball machines, then Go Pro for a permanent income boost.",
     status: "In development",
     roblox: "116828189545156",
