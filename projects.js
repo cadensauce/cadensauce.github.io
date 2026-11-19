@@ -28,17 +28,8 @@ const PROJECTS = [
     repo: "cadensauce/classroom-hub"
   },
   {
-    name: "Boreas",
-    desc: "Free PC optimizer for Windows gamers: one-click Boost, tweaks for each game, NVIDIA and AMD support, and every change can be undone.",
-    status: "In development",
-    url: "https://cadensauce.github.io/boreas/",
-    icon: "https://cadensauce.github.io/boreas/icon.png",
-    repo: "cadensauce/boreas",
-    notes: ["Windows", "Rust", "Free download"]
-  },
-  {
     name: "Incremental (WIP)",
-    desc: "Football practice clicker on Roblox: run drills for cash, fill your field with cones, sleds and ball machines, then Go Pro for a permanent income boost.",
+    desc: "Incremental game on Roblox: earn cash, buy upgrades that grow your income, then rebirth for a permanent boost.",
     status: "In development",
     roblox: "116828189545156",
     notes: ["Roblox", "Incremental"]
