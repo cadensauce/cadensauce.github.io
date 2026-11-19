@@ -7,6 +7,8 @@
 //   icon    optional: logo, either an image URL or inline <svg> code; without one the card shows the first letter
 //   repo    optional: "owner/name" on GitHub; the card shows when it was last updated
 //   updated optional: a date like "2026-11-17" if there is no repo
+//   roblox  optional: a Roblox place ID; when status is "Live" the card opens the game page
+//           and gets a Play button that launches the game
 const PROJECTS = [
   {
     name: "Scoreline",
@@ -33,5 +35,12 @@ const PROJECTS = [
     icon: "https://cadensauce.github.io/boreas/icon.png",
     repo: "cadensauce/boreas",
     notes: ["Windows", "Rust", "Free download"]
+  },
+  {
+    name: "Football Incremental",
+    desc: "Football practice clicker on Roblox: run drills for cash, fill your field with cones, sleds and ball machines, then Go Pro for a permanent income boost.",
+    status: "In development",
+    roblox: "116828189545156",
+    notes: ["Roblox", "Incremental"]
   }
 ];

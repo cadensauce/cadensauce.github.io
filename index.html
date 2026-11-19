@@ -15,7 +15,13 @@
   .sub { color:var(--muted); margin:0 0 36px; }
   .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:14px; }
   .card { display:flex; flex-direction:column; gap:10px; background:var(--card); border:1px solid var(--line); border-radius:12px; padding:20px; color:inherit; text-decoration:none; transition:border-color .15s, transform .15s; }
-  a.card:hover { border-color:var(--hover); transform:translateY(-2px); }
+  a.card:hover, .card.link:hover { border-color:var(--hover); transform:translateY(-2px); }
+  .card.link { position:relative; }
+  .stretch { position:absolute; inset:0; border-radius:12px; }
+  .actions { display:flex; justify-content:space-between; align-items:center; gap:8px; margin-top:auto; }
+  .actions .go { margin-top:0; }
+  .play { position:relative; z-index:1; font-size:13px; font-weight:600; text-decoration:none; color:var(--bg); background:var(--text); border-radius:999px; padding:6px 14px; }
+  .play:hover { opacity:.85; }
   .top { display:flex; justify-content:space-between; align-items:center; gap:8px; }
   .id { display:flex; align-items:center; gap:10px; min-width:0; }
   .logo { width:28px; height:28px; flex:none; display:grid; place-items:center; }
@@ -47,9 +53,20 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
   const cls = s => /live/i.test(s) ? "live" : /dev|progress|beta/i.test(s) ? "dev" : "";
   document.getElementById("grid").innerHTML = PROJECTS.map((p, i) => {
-    const tag = p.url ? "a" : "div";
-    const href = p.url ? ` href="${esc(p.url)}"` : "";
-    const host = p.url ? new URL(p.url).host + new URL(p.url).pathname.replace(/\/$/, "") : "";
+    // Roblox games: the game page link and Play button turn on once status is "Live" (game is public)
+    const live = cls(p.status) === "live";
+    const url = p.roblox ? (live ? `https://www.roblox.com/games/${p.roblox}` : "") : p.url;
+    const play = p.roblox && live ? `<a class="play" href="roblox://experiences/start?placeId=${esc(p.roblox)}">▶ Play</a>` : "";
+    const tag = url ? "a" : "div";
+    const href = url ? ` href="${esc(url)}"` : "";
+    const host = url ? new URL(url).host.replace(/^www\./, "") + new URL(url).pathname.replace(/\/$/, "") : "";
+    if (play) return `<div class="card link"><a class="stretch" href="${esc(url)}" aria-label="${esc(p.name)}"></a>
+      <div class="top"><div class="id">${!p.icon ? `<span class="logo">${esc(p.name[0])}</span>` : /^\s*<svg/.test(p.icon) ? `<span class="logo" aria-hidden="true">${p.icon}</span>` : `<img class="logo" src="${esc(p.icon)}" alt="">`}<h2>${esc(p.name)}</h2></div><span class="status ${cls(p.status)}">${esc(p.status)}</span></div>
+      <p>${esc(p.desc)}</p>
+      ${p.notes ? `<div class="tags">${p.notes.map(n => `<span class="tag">${esc(n)}</span>`).join("")}</div>` : ""}
+      <span class="upd" data-i="${i}"></span>
+      <div class="actions"><span class="go">${esc(host)} →</span>${play}</div>
+    </div>`;
     return `<${tag} class="card"${href}>
       <div class="top"><div class="id">${!p.icon ? `<span class="logo">${esc(p.name[0])}</span>` : /^\s*<svg/.test(p.icon) ? `<span class="logo" aria-hidden="true">${p.icon}</span>` : `<img class="logo" src="${esc(p.icon)}" alt="">`}<h2>${esc(p.name)}</h2></div><span class="status ${cls(p.status)}">${esc(p.status)}</span></div>
       <p>${esc(p.desc)}</p>
